@@ -6,6 +6,7 @@ FROM ubuntu:bionic
 LABEL org.label-schema.vendor="Centraal Bureau voor de Statistiek" \
       maintainer="Sander Janssen / Remco Vergoossen <sander.janssen@cbs.nl>"
 ENV TZ=Europe/Amsterdam
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
