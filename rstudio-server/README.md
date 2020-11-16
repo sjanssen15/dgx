@@ -4,7 +4,7 @@ WARNING: Don't use variables in a production environment. Used args in build com
 ```bash
 docker build . --build-arg r_username=<username> --build-arg r_password=<password> --tag rstudio-server:latest
 ```
-# How to run
+## How to run
 ```bash
 docker run --publish 8787:8080 -dit --name rstudio-server rstudio-server:latest
 ```
