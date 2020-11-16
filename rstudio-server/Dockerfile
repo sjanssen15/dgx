@@ -15,13 +15,13 @@ RUN apt-get update \
 		software-properties-common \
                 dirmngr \
                 ed \
-		less \
-		locales \
-		vim-tiny \
-		wget \
-		ca-certificates \
-        gdebi-core \
-        psmisc \
+                less \
+                locales \
+                vim-tiny \
+                wget \
+                ca-certificates \
+                gdebi-core \
+                psmisc \
         && add-apt-repository --enable-source --yes "ppa:marutter/rrutter4.0" \
         && add-apt-repository --enable-source --yes "ppa:c2d4u.team/c2d4u4.0+"
 
