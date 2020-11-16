@@ -54,7 +54,7 @@ RUN apt-get update \
 
 ### Download RStudio Server
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1093-amd64.deb -P /tmp/
-RUN gdebi /tmp/rstudio-server-1.3.1093-amd64.deb
+RUN gdebi /tmp/rstudio-server-1.3.1093-amd64.deb -y
 
 ### Cleanup files
 RUN rm -f /tmp/rstudio-server-1.3.1093-amd64.deb
