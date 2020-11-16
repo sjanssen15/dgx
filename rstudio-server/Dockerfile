@@ -52,6 +52,9 @@ RUN apt-get update \
  	&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  	&& rm -rf /var/lib/apt/lists/*
 
+### Add admin user
+RUN useradd -ms /bin/bash admsjen
+
 ### Download RStudio Server
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1093-amd64.deb -P /tmp/
 RUN gdebi -n /tmp/rstudio-server-1.3.1093-amd64.deb
@@ -60,4 +63,4 @@ RUN gdebi -n /tmp/rstudio-server-1.3.1093-amd64.deb
 RUN rm -f /tmp/rstudio-server-1.3.1093-amd64.deb
 
 
-CMD ["rstudio-server verify-installation"]
+CMD ["rstudio-server start"]
