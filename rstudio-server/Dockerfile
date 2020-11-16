@@ -27,8 +27,6 @@ RUN apt-get update \
                 sudo \
                 lsb-release \
                 libssl1.0.0 \
-                libssl1.0.2 \
-                libssl1.1 \
                 libclang-dev \
                 libc6 \
         && add-apt-repository --enable-source --yes "ppa:marutter/rrutter4.0" \
