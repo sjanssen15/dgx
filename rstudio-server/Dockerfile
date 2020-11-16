@@ -63,4 +63,4 @@ RUN gdebi -n /tmp/rstudio-server-1.3.1093-amd64.deb
 RUN rm -f /tmp/rstudio-server-1.3.1093-amd64.deb
 
 
-CMD ["rstudio-server start"]
+CMD ["/usr/sbin/rstudio-server start"]
