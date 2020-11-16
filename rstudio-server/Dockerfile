@@ -52,14 +52,33 @@ RUN apt-get update \
  	&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  	&& rm -rf /var/lib/apt/lists/*
 
-### Add admin user
-RUN useradd -ms /bin/bash admsjen
+
 
 ### Download RStudio Server
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1093-amd64.deb -P /tmp/
 RUN gdebi -n /tmp/rstudio-server-1.3.1093-amd64.deb
+ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
 ### Cleanup files
 RUN rm -f /tmp/rstudio-server-1.3.1093-amd64.deb
 
-CMD ["/usr/sbin/rstudio-server","start"]
+### Add admin user
+RUN mkdir /rstudio-users
+RUN useradd -m -d /home/admsjen -s /bin/bash -p $(perl -e 'print crypt($ARGV[0], "password")' 'password') admsjen
+RUN chown admsjen:admsjen /home/admsjen
+RUN usermod -a -G rstudio-server admsjen
+
+### RStudio Server Config
+#RUN echo "auth-required-user-group=rstudio-users" >> /etc/rstudio/rserver.conf
+RUN echo "server-app-armor-enabled=0" >> /etc/rstudio/rserver.conf
+
+### Generate startup script
+RUN mkdir /rstudio-server
+RUN touch /rstudio-server/startup.sh
+RUN echo "#!/bin/bash" >> /rstudio-server/startup.sh
+RUN echo "/etc/init.d/rstudio-server start" >> /rstudio-server/startup.sh
+RUN echo "cat" >> /rstudio-server/startup.sh
+RUN ["chmod", "+x", "/rstudio-server/startup.sh"]
+
+# CMD /bin/bash
+CMD ["/bin/bash","/rstudio-server/startup.sh"]
