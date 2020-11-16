@@ -5,6 +5,7 @@ FROM ubuntu:bionic
 
 LABEL org.label-schema.vendor="Centraal Bureau voor de Statistiek" \
       maintainer="Sander Janssen / Remco Vergoossen <sander.janssen@cbs.nl>"
+ENV TZ=Europe/Amsterdam
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -28,9 +29,6 @@ ENV LANG en_US.UTF-8
 
 ## This was not needed before but we need it now
 ENV DEBIAN_FRONTEND noninteractive
-
-## Otherwise timedatectl will get called which leads to 'no systemd' inside Docker
-ENV TZ UTC+1
 
 RUN apt-get update \
         && apt-get install -y --no-install-recommends \
