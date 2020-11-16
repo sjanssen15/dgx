@@ -22,6 +22,15 @@ RUN apt-get update \
                 ca-certificates \
                 gdebi-core \
                 psmisc \
+                libapparmor1 \
+                libedit2 \
+                sudo \
+                lsb-release \
+                libssl1.0.0 \
+                libssl1.0.2 \
+                libssl1.1 \
+                libclang-dev \
+                libc6 \
         && add-apt-repository --enable-source --yes "ppa:marutter/rrutter4.0" \
         && add-apt-repository --enable-source --yes "ppa:c2d4u.team/c2d4u4.0+"
 
