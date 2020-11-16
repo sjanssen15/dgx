@@ -62,12 +62,16 @@ ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 ### Cleanup files
 RUN rm -f /tmp/rstudio-server-1.3.1093-amd64.deb
 
-### Add RStudio user
+### Test
 ARG r_username
 ARG r_password
-RUN useradd -m -d /home/$r_username -s /bin/bash -p $(perl -e 'print crypt($ARGV[0], "password")' '$r_password') $$r_username
-RUN chown admsjen:admsjen /home/$r_username
-RUN usermod -a -G rstudio-server $r_username
+RUN echo ${r_username}
+RUN echo ${r_password}
+
+### Add RStudio user
+RUN useradd -m -d /home/${r_username} -s /bin/bash -p $(perl -e 'print crypt($ARGV[0], "password")' ${r_password}) ${r_username}
+RUN chown ${r_username}:${r_username} /home/${r_username}
+RUN usermod -a -G rstudio-server ${r_username}
 
 ### RStudio Server Config
 #RUN echo "auth-required-user-group=rstudio-users" >> /etc/rstudio/rserver.conf
